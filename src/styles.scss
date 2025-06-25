@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Inter var';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'Inter var', sans-serif;
+}
+
+html,
+body {
+  font-size: 12px;
+  font-family: 'Inter var', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // // background-color: white;
+  scroll-behavior: smooth;
+}
+
+a{
+  cursor: pointer;
+}
+///////////////////
+
+// Load only required icons
+.pi {
+  font-family: primeicons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+}
+
+// Include only icons you need
+.pi-check:before { content: "\e909"; }
+.pi-times:before { content: "\e90b"; }

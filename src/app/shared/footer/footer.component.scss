@@ -1,0 +1,500 @@
+// footer.component.scss
+
+// Variables
+$primary-color: #1E40AF;
+$secondary-color: #FFD700;
+$accent-color: #DC2626;
+$text-light: #E5E7EB;
+$text-muted: #9CA3AF;
+$border-color: #374151;
+$bg-dark: #111827;
+$bg-darker: #0F172A;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin hover-lift {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+// Main Footer Styles
+.footer {
+  background: linear-gradient(135deg, $bg-darker 0%, $bg-dark 100%);
+  color: $text-light;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $secondary-color, transparent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+// Container
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Main Footer Content
+.footer-main {
+  padding: 60px 0 40px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+// Footer Sections
+.footer-section {
+  h4 {
+    color: $secondary-color;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, $secondary-color, transparent);
+      border-radius: 1px;
+    }
+  }
+}
+
+// Company Info Section
+.footer-logo {
+  @include flex-center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+
+  .logo-icon {
+    margin-right: 15px;
+
+    svg {
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+      @include transition(transform);
+
+      &:hover {
+        transform: rotate(10deg) scale(1.05);
+      }
+    }
+  }
+
+  .logo-text {
+    h3 {
+      color: $secondary-color;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 5px 0;
+      background: linear-gradient(45deg, $secondary-color, #FFF59D);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      color: $text-muted;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+}
+
+.company-description {
+  color: $text-muted;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.certifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .cert-badge {
+    background: linear-gradient(135deg, $primary-color, #3B82F6);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    @include transition();
+
+    &:hover {
+      background: linear-gradient(135deg, #3B82F6, $primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+  }
+}
+
+// Links Section
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 12px;
+
+    .footer-link {
+      color: $text-muted;
+      text-decoration: none;
+      @include flex-center;
+      justify-content: flex-start;
+      @include transition();
+      padding: 8px 0;
+      border-radius: 4px;
+
+      svg {
+        margin-right: 10px;
+        color: $secondary-color;
+        @include transition(transform);
+      }
+
+      &:hover {
+        color: $text-light;
+        padding-left: 8px;
+
+        svg {
+          transform: rotate(15deg) scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+// Contact Section
+.contact-info {
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    @include transition();
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 215, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    &.emergency {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    @include flex-center;
+    background: linear-gradient(135deg, $primary-color, #3B82F6);
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+
+    &.emergency {
+      background: linear-gradient(135deg, $accent-color, #EF4444);
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+
+    svg {
+      color: white;
+    }
+  }
+
+  .contact-details {
+    flex: 1;
+
+    .contact-label {
+      display: block;
+      color: $text-muted;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      color: $text-light;
+      font-weight: 500;
+      text-decoration: none;
+      @include transition();
+
+      &:hover {
+        color: $secondary-color;
+      }
+
+      &.emergency-phone {
+        color: $secondary-color;
+        font-size: 1.1rem;
+        font-weight: 600;
+
+        &:hover {
+          color: #FFF59D;
+          text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Service Hours Section
+.service-hours {
+  margin-bottom: 30px;
+
+  .hours-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .hours-label {
+      color: $text-muted;
+      font-size: 0.95rem;
+    }
+
+    .hours-value {
+      color: $text-light;
+      font-weight: 500;
+
+      &.available {
+        color: $secondary-color;
+        font-weight: 600;
+        position: relative;
+
+        &::before {
+          content: '●';
+          color: #10B981;
+          margin-right: 8px;
+          animation: blink 2s ease-in-out infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.guarantees {
+  .guarantee-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid #10B981;
+    @include transition();
+
+    &:hover {
+      background: rgba(16, 185, 129, 0.15);
+      transform: translateX(5px);
+    }
+
+    .guarantee-icon {
+      color: #10B981;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    span {
+      color: $text-light;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Bottom Bar
+.footer-bottom {
+  background: $bg-darker;
+  border-top: 1px solid $border-color;
+  padding: 20px 0;
+
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .copyright {
+    p {
+      color: $text-muted;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+  }
+
+  .legal-links {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .legal-link {
+      color: $text-muted;
+      text-decoration: none;
+      font-size: 0.9rem;
+      @include transition();
+
+      &:hover {
+        color: $text-light;
+      }
+    }
+  }
+
+  .social-links {
+    display: flex;
+    gap: 15px;
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      @include flex-center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      color: $text-muted;
+      text-decoration: none;
+      @include transition();
+      border: 1px solid transparent;
+
+      &:hover {
+        background: $primary-color;
+        color: white;
+        border-color: $secondary-color;
+        @include hover-lift;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+    }
+  }
+}
+
+// Emergency CTA
+.emergency-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .emergency-button {
+    @include flex-center;
+    background: linear-gradient(135deg, $accent-color, #EF4444);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+    @include transition();
+    animation: float 3s ease-in-out infinite;
+
+    &:hover {
+      background: linear-gradient(135deg, #EF4444, $accent-color);
+      @include hover-lift;
+      animation-play-state: paused;
+    }
+
+    .emergency-icon {
+      margin-right: 10px;
+      animation: shake 2s ease-in-out infinite;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding: 12px 20px;
+      font-size: 0.9rem;
+
+      span {
+        display: none;
+      }
+    }
+  }
+}

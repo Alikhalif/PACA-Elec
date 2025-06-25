@@ -1,0 +1,447 @@
+// Variables
+$primary-color: #2563eb;
+$secondary-color: #fbbf24;
+$accent-color: #f59e0b;
+$dark-color: #1e293b;
+$gray-color: #64748b;
+$light-gray: #f1f5f9;
+$white: #ffffff;
+
+$navbar-height: 80px;
+$navbar-height-scrolled: 70px;
+$mobile-breakpoint: 768px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// Main navbar styles
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navbar-height;
+  background-color: rgba($white, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba($dark-color, 0.1);
+  z-index: 1000;
+  @include transition();
+
+  &.scrolled {
+    height: $navbar-height-scrolled;
+    background-color: rgba($white, 0.98);
+    box-shadow: 0 4px 20px rgba($dark-color, 0.15);
+  }
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+// Brand/Logo
+.navbar-brand {
+  flex-shrink: 0;
+
+  .brand-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .logo {
+    @include flex-center;
+    gap: 8px;
+
+    .logo-icon {
+      font-size: 24px;
+      color: $primary-color;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: $dark-color;
+      white-space: nowrap;
+    }
+  }
+}
+
+// Desktop Menu
+.desktop-menu {
+  display: none;
+
+  @media (min-width: $mobile-breakpoint ) {
+    display: block;
+  }
+
+  .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 32px;
+
+    .nav-item {
+      .nav-link {
+        text-decoration: none;
+        color: $gray-color;
+        font-weight: 500;
+        font-size: 15px;
+        padding: 8px 0;
+        position: relative;
+        @include transition();
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        &.active {
+          color: $primary-color;
+          font-weight: 600;
+        }
+
+        // Active indicator
+        &.active::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: $primary-color;
+          border-radius: 1px;
+        }
+      }
+    }
+  }
+}
+
+// CTA Buttons
+.desktop-cta {
+  display: none;
+  gap: 12px;
+
+  @media (min-width: $mobile-breakpoint ) {
+    display: flex;
+  }
+
+  .cta-btn {
+    @include flex-center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    @include transition();
+
+    .cta-icon {
+      font-size: 16px;
+    }
+
+    &.cta-primary {
+      background-color: $secondary-color;
+      color: $white;
+      border: 2px solid $secondary-color;
+
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba($secondary-color, 0.3);
+      }
+    }
+
+    &.cta-secondary {
+      background-color: transparent;
+      color: $primary-color;
+      border: 2px solid $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: $white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+      }
+    }
+  }
+}
+
+// Mobile Toggle Button
+.mobile-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  @include transition();
+
+  @media (min-width: $mobile-breakpoint ) {
+    display: none;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: $dark-color;
+    margin: 2px 0;
+    @include transition(all, 0.3s, ease);
+  }
+
+  &.active {
+    .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+  }
+
+  &:hover .hamburger-line {
+    background-color: $primary-color;
+  }
+}
+
+// Mobile Menu
+.mobile-menu {
+  position: fixed;
+  top: $navbar-height;
+  right: -100%;
+  width: 100%;
+  max-width: 300px;
+  height: calc(100vh - #{$navbar-height});
+  background-color: $white;
+  box-shadow: -5px 0 15px rgba($dark-color, 0.1);
+  @include transition(right, 0.3s, ease);
+  overflow-y: auto;
+
+  &.open {
+    right: 0;
+  }
+
+  .mobile-menu-content {
+    padding: 20px;
+  }
+
+  .mobile-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .mobile-nav-item {
+      margin-bottom: 4px;
+
+      .mobile-nav-link {
+        display: block;
+        padding: 12px 16px;
+        color: $gray-color;
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 8px;
+        @include transition();
+
+        &:hover {
+          background-color: $light-gray;
+          color: $primary-color;
+        }
+
+        &.active {
+          background-color: lighten($primary-color, 45%);
+          color: $primary-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .mobile-cta {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid $light-gray;
+
+    .mobile-cta-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      text-align: left;
+      @include transition();
+
+      .cta-icon {
+        font-size: 18px;
+      }
+
+      &.primary {
+        background-color: $secondary-color;
+        color: $white;
+
+        &:hover {
+          background-color: darken($secondary-color, 10%);
+        }
+      }
+
+      &.secondary {
+        background-color: $light-gray;
+        color: $primary-color;
+        border: 1px solid lighten($primary-color, 30%);
+
+        &:hover {
+          background-color: lighten($primary-color, 45%);
+        }
+      }
+    }
+  }
+}
+
+// Mobile Overlay
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($dark-color, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  @include transition(all, 0.3s, ease);
+  z-index: 999;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $mobile-breakpoint) {
+  .navbar-container {
+    padding: 0 16px;
+  }
+
+  .navbar-brand .logo .logo-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 12px;
+  }
+
+  .navbar-brand .logo {
+    .logo-icon {
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-size: 16px;
+    }
+  }
+
+  .mobile-menu {
+    max-width: 100%;
+    top: $navbar-height;
+    right: -100%;
+
+    &.open {
+      right: 0;
+    }
+  }
+}
+
+// Scrolled navbar adjustments
+.navbar.scrolled {
+  .navbar-container {
+    .navbar-brand .logo {
+      .logo-icon {
+        font-size: 22px;
+      }
+
+      .logo-text {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .desktop-cta .cta-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  + .mobile-menu {
+    top: $navbar-height-scrolled;
+    height: calc(100vh - #{$navbar-height-scrolled});
+  }
+}
+
+// Animation for menu items
+.mobile-nav-item {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideInLeft 0.3s ease forwards;
+
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu.open .mobile-cta {
+  .mobile-cta-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 0.3s ease forwards;
+
+    &:nth-child(1) {
+      animation-delay: 0.6s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.7s;
+    }
+  }
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

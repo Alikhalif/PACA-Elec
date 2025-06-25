@@ -1,0 +1,113 @@
+<section class="contact-section">
+  <!-- Water Drop Background Elements -->
+  <div class="water-drops">
+    <div class="water-drop" *ngFor="let drop of [].constructor(15)"></div>
+  </div>
+
+  <div class="container">
+    <!-- Hero Header -->
+    <div class="contact-hero">
+      <div class="hero-content animate-fade-in-up">
+        <div class="hero-badge">
+          <span class="badge-icon">📞</span>
+          <span>Contact rapide</span>
+        </div>
+        <h1 class="hero-title">
+          Besoin d'un <span class="title-highlight">électricien</span> en urgence ?
+        </h1>
+        <p class="hero-subtitle">
+          Notre équipe est disponible 24h/24 pour répondre à vos demandes
+          <br>
+          Intervention en moins de 2h dans toute la région PACA
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <div class="contact-form-container animate-slide-in-left">
+        <h2 class="form-title">
+          <span class="form-icon">✍️</span>
+          Formulaire de contact
+        </h2>
+
+        <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="contact-form">
+          <div class="form-group">
+            <label for="name">Votre nom</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              placeholder="Jean Dupont">
+          </div>
+
+          <div class="form-group">
+            <label for="city">Ville d'intervention</label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              placeholder="Marseille, Nice, Toulon...">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input
+              type="tel"
+              id="phone"
+              formControlName="phone"
+              placeholder="04 12 34 56 78">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description du problème</label>
+            <textarea
+              id="description"
+              formControlName="description"
+              rows="4"
+              placeholder="Décrivez votre problème de plomberie..."></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-button"
+            [disabled]="!contactForm.valid">
+            <span class="button-icon">📩</span>
+            Envoyer la demande
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Methods -->
+      <div class="contact-methods animate-slide-in-right">
+        <h2 class="methods-title">
+          <span class="methods-icon">🚀</span>
+          Contact direct
+        </h2>
+
+        <div class="methods-grid">
+          <a
+            *ngFor="let method of contactMethods"
+            [href]="method.action"
+            class="method-card"
+            [style.--gradient]="method.color">
+            <div class="method-icon">{{ method.icon }}</div>
+            <div class="method-content">
+              <h3 class="method-title">{{ method.title }}</h3>
+              <p class="method-value">{{ method.value }}</p>
+            </div>
+            <div class="method-arrow">→</div>
+          </a>
+        </div>
+
+        <!-- Emergency CTA (Mobile) -->
+        <div class="emergency-cta-mobile">
+          <a href="tel:+33756935200" class="emergency-button">
+            <span class="emergency-icon">🚨</span>
+            <span>Appel d'urgence</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

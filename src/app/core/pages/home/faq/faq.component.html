@@ -1,0 +1,62 @@
+<section class="faq-section">
+  <!-- Background Elements -->
+  <div class="bubbles-background">
+    <div class="bubble" *ngFor="let bubble of [].constructor(20)"></div>
+  </div>
+
+  <div class="container">
+    <!-- Hero Header -->
+    <div class="faq-hero">
+      <div class="hero-content animate-fade-in-up">
+        <div class="hero-badge">
+          <span class="badge-icon">❓</span>
+          <span>Questions fréquentes</span>
+        </div>
+        <h1 class="hero-title">
+          Vos questions, <span class="title-highlight">nos réponses</span>
+        </h1>
+        <p class="hero-subtitle">
+          Tout ce que vous devez savoir avant de faire appel à notre service de plomberie
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="faq-accordion">
+      <div
+        class="faq-item"
+        *ngFor="let item of faqItems; let i = index"
+        [class.open]="item.isOpen"
+        [style.animation-delay.ms]="i * 100">
+
+        <div class="faq-question" (click)="toggleFAQ(i)">
+          <div class="question-content">
+            <span class="question-icon">{{ item.icon }}</span>
+            <h3 class="question-text">{{ item.question }}</h3>
+          </div>
+          <span class="toggle-icon">{{ item.isOpen ? '−' : '+' }}</span>
+        </div>
+
+        <div class="faq-answer" [@answerAnimation]="item.isOpen ? 'open' : 'closed'">
+          <p>{{ item.answer }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="faq-cta animate-slide-in-up">
+      <h3>Vous ne trouvez pas votre réponse ?</h3>
+      <p>Notre équipe est disponible pour répondre à toutes vos questions</p>
+      <div class="cta-buttons">
+        <a href="tel:+33756935200" class="cta-button phone">
+          <span class="cta-icon">📞</span>
+          <span>Appeler maintenant</span>
+        </a>
+        <a routerLink="/contact" class="cta-button contact">
+          <span class="cta-icon">✉️</span>
+          <span>Nous écrire</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

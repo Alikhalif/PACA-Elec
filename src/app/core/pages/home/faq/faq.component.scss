@@ -1,0 +1,328 @@
+$primary-color: #fbbf24;
+$secondary-color: #2563eb;
+$accent-color: #fbbf24;
+$success-color: #10b981;
+$dark-color: #1f2937;
+$gray-color: #6b7280;
+$light-gray: #f8fafc;
+$white: #ffffff;
+
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1200px;
+
+// Mixins
+@mixin glass-card($opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin animation-base {
+  // opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin slide-animation {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.faq-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, $light-gray 0%, $white 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bubbles-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+
+  .bubble {
+    position: absolute;
+    background: rgba($primary-color, 0.05);
+    border-radius: 50%;
+    animation: floatBubble 15s linear infinite;
+
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        $size: random(50) + 10 + px;
+        width: $size;
+        height: $size;
+        top: random(100) + 0%;
+        left: random(100) + 0%;
+        animation-delay: random(15) + 0s;
+        animation-duration: random(10) + 10 + s;
+      }
+    }
+  }
+}
+
+// Hero Section
+.faq-hero {
+  text-align: center;
+  margin-bottom: 60px;
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    @include animation-base;
+  }
+
+  .hero-badge {
+    @include glass-card(0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    color: $dark-color;
+
+    .badge-icon {
+      font-size: 18px;
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: $dark-color;
+    margin-bottom: 16px;
+    line-height: 1.2;
+
+    .title-highlight {
+      color: $primary-color;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, $primary-color, $accent-color);
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: $gray-color;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// FAQ Accordion
+.faq-accordion {
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.faq-item {
+  @include glass-card(0.1);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  &:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  &.open {
+    box-shadow: 0 15px 40px rgba($primary-color, 0.1);
+  }
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  .question-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .question-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $dark-color;
+      margin: 0;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .toggle-icon {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba($primary-color, 0.05);
+
+    .question-text {
+      color: $primary-color;
+    }
+  }
+}
+
+.faq-answer {
+  background: rgba($white, 0.8);
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+
+  p {
+    margin: 0;
+    padding: 0 0 24px;
+    color: $dark-color;
+    line-height: 1.6;
+  }
+}
+
+// CTA Section
+.faq-cta {
+  text-align: center;
+  padding: 40px;
+  @include glass-card(0.1);
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  h3 {
+    font-size: 1.5rem;
+    color: $dark-color;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: $gray-color;
+    margin-bottom: 24px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 24px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &.phone {
+      background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+      color: $white;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba($primary-color, 0.3);
+      }
+    }
+
+    &.contact {
+      background: rgba($accent-color, 0.1);
+      color: $dark-color;
+      border: 1px solid rgba($accent-color, 0.3);
+
+      &:hover {
+        background: rgba($accent-color, 0.2);
+        transform: translateY(-3px);
+      }
+    }
+
+    .cta-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Animations
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-100px) translateX(20px);
+  }
+  50% {
+    transform: translateY(-200px) translateX(0);
+  }
+  75% {
+    transform: translateY(-300px) translateX(-20px);
+  }
+  100% {
+    transform: translateY(-400px) translateX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
