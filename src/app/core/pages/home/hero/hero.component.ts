@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <section class="hero">
+    <!-- <section class="hero">
+
+
       <div class="hero__background">
         <div class="hero__background-overlay"></div>
         <div class="hero__particles">
@@ -46,7 +49,6 @@ import { FormsModule } from '@angular/forms';
             </div>
           </div>
 
-          <!-- <div class="hero__actions" [class.animate]="isLoaded">
             <button class="btn btn--primary" (click)="callNow()">
               <span class="btn__icon">📞</span>
               <span class="btn__text">Appel immédiat</span>
@@ -58,19 +60,14 @@ import { FormsModule } from '@angular/forms';
               <span class="btn__text">Devis gratuit</span>
               <div class="btn__ripple"></div>
             </button>
-          </div> -->
+          </div>
 
-          <!-- Main CTA Buttons -->
           <div class="hero-cta animate-fade-in-up" style="animation-delay: 0.6s">
             <a href="tel:+33756935200" class="cta-btn cta-primary pulse-animation">
               <span class="cta-icon">📞</span>
               <span class="cta-text">Appelez un électricien maintenant</span>
               <span class="cta-badge">URGENT</span>
             </a>
-            <!-- <a routerLink="/devis" class="cta-btn cta-secondary" (click)="openQuoteForm()">
-              <span class="cta-icon">📩</span>
-              <span class="cta-text">Devis gratuit</span>
-            </a> -->
           </div>
         </div>
 
@@ -110,9 +107,8 @@ import { FormsModule } from '@angular/forms';
             <div class="floating-element floating-element--3" [class.animate]="isLoaded">⚡</div>
           </div>
         </div>
-      </div>
 
-      <!-- Quote Form Modal -->
+
       <div class="modal" [class.active]="showQuoteForm" (click)="closeQuoteForm()">
         <div class="modal__content" (click)="$event.stopPropagation()">
           <div class="modal__header">
@@ -160,78 +156,158 @@ import { FormsModule } from '@angular/forms';
           </form>
         </div>
       </div>
+    </section> -->
+
+    <section class="hero-section">
+      <!-- Background with Glassmorphism Effect -->
+      <div class="hero-background">
+        <div class="background-image"></div>
+        <div class="glass-overlay"></div>
+        <div class="animated-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+          <div class="shape shape-4"></div>
+        </div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="hero-container">
+        <div class="hero-content" [class.visible]="isVisible">
+          <!-- Badge -->
+          <div class="">
+            <div class="hero-badge animate-fade-in-up" style="animation-delay: 0.1s">
+              <span class="badge-icon">⚡</span>
+              <span class="badge-text">Intervention d'urgence 24h/24</span>
+            </div>
+
+            <a href="tel:+33756935200" class="hero-badge animate-fade-in-up" style="animation-delay: 0.6s">
+              <span class="badge-icon">📞</span>
+              <span class="badge-text">07 56 93 52 00</span>
+            </a>
+          </div>
+
+
+          <!-- Main Title -->
+          <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s">
+  <span class="title-highlight">Électricien 24h/24</span>
+
+  <div class="title-line-spacer"></div>
+
+  Une panne de courant ?
+
+  <div class="title-line-spacer"></div>
+
+  Une panne sur votre tableau électrique ?
+
+  <div class="title-line-spacer"></div>
+
+  Un électricien agréé chez vous en <span class="urgent-text">20 minutes !</span>
+
+  <div class="title-line-spacer"></div>
+
+  Intervention <span class="urgent-text">7j/7 24h/24</span>
+</h1>
+
+          <!-- Subtitle -->
+          <!-- <p class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.4s">
+
+            Intervention en moins de 20 minute
+          </p> -->
+
+          <!-- Main CTA Buttons -->
+          <div class="hero-cta animate-fade-in-up" style="animation-delay: 0.6s">
+            <a href="tel:+33756935200" class="cta-btn cta-primary pulse-animation">
+              <span class="cta-icon">📞</span>
+              <span class="cta-text">Appelez un électricien maintenant</span>
+              <span class="cta-badge">URGENT</span>
+            </a>
+          </div>
+
+          <!-- Features Grid -->
+          <div class="features-grid animate-fade-in-up" style="animation-delay: 0.8s">
+            <div class="feature-card"
+                 *ngFor="let feature of features; let i = index"
+                 [style.animation-delay.s]="1.2 + (i * 0.2)">
+              <div class="feature-icon">{{ feature.icon }}</div>
+              <div class="feature-text">{{ feature.text }}</div>
+              <div class="feature-check">✅</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
+
   `,
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent implements OnInit {
-  isLoaded = false;
-  showQuoteForm = false;
-  currentTime = '';
-
-  particles = Array.from({ length: 15 }, () => ({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 2
-  }));
+  isVisible = true;
 
   features = [
-    { icon: '⚡', text: 'Intervention sous 2h' },
-    { icon: '🚫', text: 'Déplacement gratuit' },
-    { icon: '✅', text: 'Électriciens certifiés' },
-    { icon: '📋', text: 'Devis sans engagement' }
+    { icon: '⚡', text: 'Intervention urgente sous 2h' },
+    { icon: '🆓', text: 'Déplacement gratuit si réparation sur place' },
+    { icon: '👨‍🔧', text: 'Techniciens certifiés, devis transparent' },
+    { icon: '💳', text: 'Paiement CB, virement, ou sur facture' }
   ];
 
-  quote = {
-    name: '',
-    phone: '',
-    email: '',
-    issue: '',
-    description: ''
-  };
+  private animationInterval: any;
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private title: Title, private meta: Meta
+  ) {
+    // this.title.setTitle('Plombier 24h/24 – Intervention rapide en PACA | depannageplomberie-paca.com');
+
+    this.meta.addTags([
+      // { name: 'description', content: 'Plombier en région PACA – Dépannage rapide, installation, rénovation et recherche de fuite. Interventions en moins de 2h.' },
+      // { name: 'keywords', content: 'plombier PACA, urgence plomberie, dépannage fuite, plombier Marseille, Aix, Toulon, Nice, PACA' },
+      // { name: 'robots', content: 'index, follow' },
+      // { property: 'og:title', content: 'Plombier PACA – Urgences 24h/24 | depannageplomberie-paca.com' },
+      // { property: 'og:description', content: 'Un plombier de confiance en région PACA. Intervention rapide, devis gratuit et techniciens certifiés.' },
+      // { property: 'og:type', content: 'website' },
+      // { property: 'og:url', content: 'https://www.depannageplomberie-paca.com/home' },
+    ]);
+  }
+
 
   ngOnInit() {
-      this.isLoaded = true;
-
-    // this.updateTime();
-    // setInterval(() => this.updateTime(), 1000);
+    // Trigger animations on load
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        this.isVisible = true;
+      }, 10);
+      this.startShapeAnimation();
+    }
   }
 
-  updateTime() {
-    const now = new Date();
-    this.currentTime = now.toLocaleTimeString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit'
+  ngOnDestroy() {
+    if (this.animationInterval) {
+      clearInterval(this.animationInterval);
+    }
+  }
+
+  @HostListener('window:scroll', [])
+    onWindowScroll() {
+      if (isPlatformBrowser(this.platformId)) {
+      const scrollIndicator = document.querySelector('.scroll-indicator') as HTMLElement;
+      if (scrollIndicator) {
+        const opacity = Math.max(0, 1 - window.pageYOffset / 300);
+        scrollIndicator.style.opacity = opacity.toString();
+      }
+    }
+  }
+
+  private startShapeAnimation() {
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, index) => {
+      const element = shape as HTMLElement;
+      const delay = index * 2000;
+
+      setTimeout(() => {
+        element.style.animationDelay = '0s';
+        element.classList.add('floating');
+      }, delay);
     });
-  }
-
-  callNow() {
-    // Simulate phone call
-    window.location.href = 'tel:+33756935200';
-  }
-
-  openQuoteForm() {
-    this.showQuoteForm = true;
-    document.body.style.overflow = 'hidden';
-  }
-
-  closeQuoteForm() {
-    this.showQuoteForm = false;
-    document.body.style.overflow = 'auto';
-  }
-
-  submitQuote() {
-    console.log('Quote submitted:', this.quote);
-    // Handle form submission
-    this.closeQuoteForm();
-
-    // Reset form
-    this.quote = {
-      name: '',
-      phone: '',
-      email: '',
-      issue: '',
-      description: ''
-    };
   }
 }

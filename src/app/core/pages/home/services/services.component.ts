@@ -114,7 +114,7 @@ interface Service {
           <div class="emergency-content">
             <div class="emergency-icon">🚨</div>
             <div class="emergency-text">
-              <h3>Urgence Électrique 24h/7j</h3>
+              <h3>Urgence Électrique 24h/24</h3>
               <p>Intervention rapide pour toute urgence électrique</p>
             </div>
             <a href="tel:+33756935200" class="emergency-button">

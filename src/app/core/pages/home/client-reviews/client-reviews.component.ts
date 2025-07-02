@@ -69,7 +69,7 @@ interface Review {
                 </div>
                 <div class="client-details">
                   <h4 class="client-name">{{ review.name }}</h4>
-                  <p class="client-location">{{ review.location }}</p>
+                  <!-- <p class="client-location">{{ review.location }}</p> -->
                 </div>
               </div>
               <div class="verification-badge">

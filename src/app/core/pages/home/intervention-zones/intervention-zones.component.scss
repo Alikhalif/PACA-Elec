@@ -160,7 +160,7 @@ $shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
 // Zones Grid
 .zones-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
   gap: 30px;
   margin-bottom: 60px;
 
@@ -305,7 +305,7 @@ $shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
 // Zone Footer
 .zone-footer {
   padding: 20px 24px 24px;
-  border-top: 1px solid $border-color;
+  // border-top: 1px solid $border-color;
 
   .contact-btn {
     text-decoration: none;

@@ -26,13 +26,13 @@ export class ContactComponent {
       action: 'tel:+33756935200',
       color: 'linear-gradient(135deg, #25D366, #128C7E)'
     },
-    {
-      icon: '📧',
-      title: 'Email',
-      value: 'contact@depannageplomberie-paca.com',
-      action: 'mailto:contact@depannageplomberie-paca.com',
-      color: 'linear-gradient(135deg, #EA4335, #BB001B)'
-    }
+    // {
+    //   icon: '📧',
+    //   title: 'Email',
+    //   value: 'contact@depannageplomberie-paca.com',
+    //   action: 'mailto:contact@depannageplomberie-paca.com',
+    //   color: 'linear-gradient(135deg, #EA4335, #BB001B)'
+    // }
   ];
 
 

@@ -28,15 +28,11 @@ interface InterventionZone {
           </div>
           <div class="stats-grid">
             <div class="stat-item">
-              <div class="stat-number">5</div>
+              <div class="stat-number">4</div>
               <div class="stat-label">Départements</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number">19</div>
-              <div class="stat-label">Villes</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">24h/7j</div>
+              <div class="stat-number">24h/24</div>
               <div class="stat-label">Disponibilité</div>
             </div>
           </div>
@@ -50,14 +46,15 @@ interface InterventionZone {
             [style.animation-delay]="(i * 0.1) + 's'"
             (mouseenter)="onCardHover(i)"
             (mouseleave)="onCardLeave(i)"
+            [style.background]="zone.color"
           >
             <div class="zone-header" [style.background]="zone.color">
               <div class="zone-icon">{{ zone.icon }}</div>
               <div class="zone-department">{{ zone.department }}</div>
-              <div class="zone-badge">{{ zone.cities.length }} villes</div>
+              <!-- <div class="zone-badge">{{ zone.cities.length }} villes</div> -->
             </div>
 
-            <div class="zone-content">
+            <!-- <div class="zone-content">
               <div class="cities-list">
                 <div
                   *ngFor="let city of zone.cities; let cityIndex = index"
@@ -68,7 +65,7 @@ interface InterventionZone {
                   <span class="city-name">{{ city }}</span>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="zone-footer">
               <button class="contact-btn" (click)="callNow()">
@@ -97,37 +94,37 @@ interface InterventionZone {
   styleUrls: ['./intervention-zones.component.scss']
 })
 export class InterventionZonesComponent implements OnInit {
-  interventionZones: InterventionZone[] = [
+  interventionZones: any[] = [
     {
       department: 'Bouches-du-Rhône',
-      cities: ['Marseille', 'Aubagne', 'Aix', 'Allauch', 'Cassis'],
+      // cities: ['Marseille', 'Aubagne', 'Aix', 'Allauch', 'Cassis'],
       color: 'linear-gradient(135deg, #2563eb, #1e40af)',
       icon: '🏙️'
     },
     {
       department: 'Var',
-      cities: ['Toulon', 'Fréjus', 'La Seyne', 'Saint-Tropez'],
+      // cities: ['Toulon', 'Fréjus', 'La Seyne', 'Saint-Tropez'],
       color: 'linear-gradient(135deg, #dc2626, #b91c1c)',
       icon: '⛵'
     },
     {
       department: 'Alpes-Maritimes',
-      cities: ['Nice', 'Antibes', 'Cannes'],
+      // cities: ['Nice', 'Antibes', 'Cannes'],
       color: 'linear-gradient(135deg, #16a34a, #15803d)',
       icon: '🌊'
     },
     {
       department: 'Vaucluse',
-      cities: ['Avignon', 'Cavaillon', 'Orange'],
+      // cities: ['Avignon', 'Cavaillon', 'Orange'],
       color: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
       icon: '🏰'
     },
-    {
-      department: 'Alpes-de-Haute-Provence',
-      cities: ['Manosque', 'Digne'],
-      color: 'linear-gradient(135deg, #f59e0b, #d97706)',
-      icon: '⛰️'
-    }
+    // {
+    //   department: 'Alpes-de-Haute-Provence',
+    //   // cities: ['Manosque', 'Digne'],
+    //   color: 'linear-gradient(135deg, #f59e0b, #d97706)',
+    //   icon: '⛰️'
+    // }
   ];
 
   ngOnInit() {

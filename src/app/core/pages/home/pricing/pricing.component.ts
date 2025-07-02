@@ -71,10 +71,10 @@ interface Guarantee {
               <p class="pricing-card__description">{{ item.description }}</p>
             </div>
 
-            <div class="pricing-card__price">
+            <!-- <div class="pricing-card__price">
               <span class="pricing-card__price-amount">{{ item.price }}</span>
               <span class="pricing-card__price-currency">TTC</span>
-            </div>
+            </div> -->
 
             <div class="pricing-card__features">
               <div
@@ -208,12 +208,12 @@ export class PricingComponent implements OnInit, OnDestroy {
     { id: 'emergency', name: 'Urgences', icon: '🚨' }
   ];
 
-  pricingItems: PricingItem[] = [
+  pricingItems: any[] = [
     {
       id: 'outlet-replacement',
       title: 'Remplacement prise/interrupteur',
       description: 'Remplacement simple d\'une prise ou interrupteur défectueux',
-      price: '59 €',
+      // price: '59 €',
       icon: '🔌',
       category: 'repair',
       features: [
@@ -227,7 +227,7 @@ export class PricingComponent implements OnInit, OnDestroy {
       id: 'panel-repair',
       title: 'Réparation tableau électrique',
       description: 'Diagnostic et réparation de votre tableau électrique',
-      price: 'À partir de 120 €',
+      // price: 'À partir de 120 €',
       icon: '⚡',
       category: 'repair',
       isPopular: true,
@@ -242,7 +242,7 @@ export class PricingComponent implements OnInit, OnDestroy {
       id: 'fault-finding',
       title: 'Recherche de panne',
       description: 'Diagnostic et localisation de panne électrique (1h)',
-      price: '75 €',
+      // price: '75 €',
       icon: '🔍',
       category: 'emergency',
       features: [
@@ -256,7 +256,7 @@ export class PricingComponent implements OnInit, OnDestroy {
       id: 'installation-outlet',
       title: 'Installation nouvelle prise',
       description: 'Installation d\'une nouvelle prise électrique',
-      price: '85 €',
+      // price: '85 €',
       icon: '🔧',
       category: 'installation',
       features: [
@@ -270,11 +270,11 @@ export class PricingComponent implements OnInit, OnDestroy {
       id: 'emergency-intervention',
       title: 'Intervention d\'urgence',
       description: 'Intervention rapide 24h/24, 7j/7',
-      price: '150 €',
+      // price: '150 €',
       icon: '🚨',
       category: 'emergency',
       features: [
-        'Intervention sous 2h',
+        'Intervention sous 20 minutes',
         'Disponible 24h/24',
         'Weekends et jours fériés',
         'Première heure incluse'
@@ -284,7 +284,7 @@ export class PricingComponent implements OnInit, OnDestroy {
       id: 'maintenance-check',
       title: 'Contrôle installation',
       description: 'Vérification complète de votre installation',
-      price: '120 €',
+      // price: '120 €',
       icon: '🛠️',
       category: 'maintenance',
       features: [

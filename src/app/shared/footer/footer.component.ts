@@ -17,18 +17,32 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
             <!-- Company Info -->
             <div class="footer-section" [@slideInLeft]>
               <div class="footer-logo">
-                <div class="logo-icon">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="20" cy="20" r="18" stroke="#FFD700" stroke-width="2" fill="#1E40AF"/>
-                    <path d="M20 8L22 18H16L18 8H20Z" fill="#FFD700"/>
-                    <path d="M20 32L18 22H24L22 32H20Z" fill="#FFD700"/>
-                    <circle cx="20" cy="20" r="3" fill="#FFD700"/>
-                  </svg>
-                </div>
-                <div class="logo-text">
-                  <h3>Elec-Urgence</h3>
-                  <p>Votre électricien de confiance</p>
-                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="220" height="90" viewBox="0 0 700 120">
+            <style>
+              .bg-circle { fill: #2563eb; } /* Secondary */
+              .bolt { fill: #fbbf24; } /* Accent */
+              .brand-text {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 900;
+                font-size: 55px;
+                fill: #fbbf24; /* Primary */
+              }
+              .sub-text {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 30px;
+                fill: #6b7280; /* Light text */
+              }
+            </style>
+            <g>
+              <!-- Circle and lightning bolt -->
+              <circle cx="50" cy="60" r="42" class="bg-circle"/>
+              <polygon class="bolt" points="42,25 66,25 54,55 75,55 46,95 54,60 32,60"/>
+
+              <!-- Brand name -->
+              <text x="110" y="60" class="brand-text">Elec-Urgence</text>
+              <text x="112" y="100" class="sub-text">Électricien 24h/24 – PACA</text>
+            </g>
+          </svg>
               </div>
 
               <p class="company-description">
@@ -124,7 +138,7 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
                 </div>
                 <div class="hours-item">
                   <span class="hours-label">Intervention</span>
-                  <span class="hours-value">Sous 2h</span>
+                  <span class="hours-value">20 minutes</span>
                 </div>
               </div>
 
@@ -164,7 +178,7 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
       </div>
 
       <!-- Emergency CTA -->
-      <div class="emergency-cta" [@emergencyPulse]>
+      <!-- <div class="emergency-cta" [@emergencyPulse]>
         <a href="tel:+33756935200" class="emergency-button">
           <div class="emergency-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -174,7 +188,7 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
           </div>
           <span>Urgence 24h/24</span>
         </a>
-      </div>
+      </div> -->
     </footer>
   `,
   styleUrls: ['./footer.component.scss'],
@@ -257,7 +271,7 @@ export class FooterComponent implements OnInit {
   guarantees = [
     'Devis gratuit',
     'Pas de frais cachés',
-    'Intervention sous 2h',
+    'Intervention sous 20 minutes',
     'Électriciens certifiés'
   ];
 
