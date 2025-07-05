@@ -86,7 +86,7 @@ interface Guarantee {
             </div>
 
             <div class="zone-footer">
-              <button class="contact-btn">
+              <button class="contact-btn" (click)="callEmergency()">
                 <span class="btn-icon">📞</span>
                 <span class="btn-text">Contacter</span>
                 <div class="btn-ripple"></div>
@@ -394,5 +394,9 @@ export class PricingComponent implements OnInit, OnDestroy {
       description: '',
       acceptTerms: false
     };
+  }
+
+  callEmergency() {
+    window.location.href = 'tel:+33756935200';
   }
 }

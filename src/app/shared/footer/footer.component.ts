@@ -96,7 +96,7 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
                   </div>
                 </div>
 
-                <div class="contact-item">
+                <!-- <div class="contact-item">
                   <div class="contact-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2L15 7H12V18H8V7H5L10 2Z"/>
@@ -105,10 +105,10 @@ import { trigger, state, style, transition, animate, stagger, query } from '@ang
                   <div class="contact-details">
                     <span class="contact-label">Email</span>
                     <a href="mailto:contact@elec-urgence.fr" class="contact-value">
-                      <!-- contact@ elec-urgence.fr -->
+                      contact@ elec-urgence.fr
                     </a>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="contact-item">
                   <div class="contact-icon">
